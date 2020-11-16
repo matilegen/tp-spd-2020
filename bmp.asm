@@ -425,27 +425,17 @@ proc CopyBitmap
     ret
 endp CopyBitmap
 
-;================================
 
-scroll_up proc
-    mov ah, 7               ;
-    mov al, 0               ; number of lines to scroll
-    mov bh, 0               ; attribute
-    mov ch, 0               ; row top
-    mov cl, 0               ; col left
-    mov dh, 200              ; row bottom
-    mov dl, 255              ; col right
-    int 10h
-	
-	mov ah, 2
-mov bh, 0
-mov ah,2
-mov bh,0
-mov dh,0
-mov dl,0
-int 10h
-    ret
-scroll_up endp
+;=====================================
+
+colorear proc
+    mov ah, 9
+    mov al, ""      ;AL = Código del carácter a escribir.
+    mov bh, 0       ;BH = Página de vídeo donde escribir el carácter.
+    mov bl, 0dh     ;BL = Atributo ó color que va a tener el carácter.
+    mov cx, 1       ;CX = Cantidad de veces que se debe escribir el carácter, uno a continuación de otro.
+	ret
+colorear endp
 
 ;================================
 imppregunta1 proc  
@@ -454,6 +444,7 @@ imppregunta1 proc
 	mov ah,9
 	mov dx,offset pr10
 	int 21h  
+	;call colorear
 	
 ;respuesta de la primer pregunta
 	mov ah,6
@@ -525,14 +516,16 @@ endp imppregunta1
 
 ;================================
 imppregunta2 proc
-call scroll_up     
+    
+int 69h
   xor bx,bx
 ;pregunta 1 
     mov ah,9
 	mov dx,offset pr20
 	int 21h  
-	
-	
+	push bx
+	call colorear
+	pop bx
 ;respuesta de la primer pregunta
 	mov ah,6
 	mov dl,[bx+offset respuestas]
@@ -559,6 +552,8 @@ call scroll_up
 	int 21h
 	mov dx,offset tab3
 	int 21h
+
+;call colorear	
 	inc bx
 	mov ah,6
 	mov dl,[bx+offset respuestas]
@@ -568,6 +563,8 @@ call scroll_up
 	int 21h
 mov dx,offset re20
 	int 21h
+	
+;call colorear
 	inc bx
 	mov ah,6
 	mov dl,[bx+offset respuestas]
@@ -579,6 +576,8 @@ mov dx,offset re20
 	int 21h
 	mov dx,offset re23
 	int 21h
+
+;call colorear
 	inc bx
 	mov ah,6
 	mov dl,[bx+offset respuestas]
@@ -590,6 +589,8 @@ mov dx,offset re20
 	int 21h
 	mov dx,offset re25
 	int 21h
+
+;call colorear
 	inc bx
 	mov ah,6
 	mov dl,[bx+offset respuestas]
@@ -606,7 +607,7 @@ endp imppregunta2
 
 imppregunta3 proc
     xor bx,bx  
-call scroll_up   
+int 69h   
 ;pregunta 1 
     mov ah,9
 	mov dx,offset pr30
