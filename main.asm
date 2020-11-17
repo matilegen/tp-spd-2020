@@ -201,6 +201,9 @@ opcion1:
     int 21h
 
     ;Vuelvo al menu
+    mov ax, 13h
+    int 10h
+
     jmp imprimenu
 
 ;aca termina el main
