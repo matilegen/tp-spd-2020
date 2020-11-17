@@ -14,30 +14,11 @@ shakirapre db 'shakira.bmp',0
 ursulapre db 'ursula.bmp',0
 scarletpre db 'scarlet.bmp',0
 
-;========================================= Preguntas
-;in0 db " ___________________________________",0dh,0ah
-;in1 db "|                                   |",0dh,0ah
-;in2 db "|   _     _            _            _  |",0dh,0ah
-;in2 db "|  | ) ° |_ |\ | \  / |_ |\ | ° |\ / \ |",0dh,0ah
-;in2 db "|  |_) | |_ | \|  \/  |_ | \| | |/ \_/ |",0dh,0ah
-;in2 db "|                                 |",0dh,0ah
-;in2 db "|                                   |",0dh,0ah
-;in2 db "|                                   |",0dh,0ah
-;in2 db "|                                   |",0dh,0ah
-;in2 db "|                                   |",0dh,0ah
-;in2 db "|                                   |",0dh,0ah
-;in2 db "|                                   |",0dh,0ah
-;in2 db "|                                   |",0dh,0ah
-;in2 db "|                                   |",0dh,0ah
-;in3 db "|    bienvenido a quien soy yo      |",0dh,0ah
-;in5 db "|___________________________________|",0dh,0ah
-
-
-;=============================== 
-
-;================================
 .CODE
 ;================================
+extrn impbienv:proc
+extrn impmenu:proc
+extrn impinst:proc
 extrn imppregunta1:proc
 extrn imppregunta2:proc
 extrn imppregunta3:proc
@@ -53,21 +34,39 @@ extrn ReadHeader:proc
 extrn ReadPalette:proc
 extrn CopyPal:proc
 extrn CopyBitmap:proc
-
 ;================================
-
 proc main 
 mov ax, @data
 mov ds, ax
 ;================================
-
     ; Graphic mode
     mov ax, 13h
     int 10h
 ;=================================
+
 ;lleno el dup de respuestas
 call llenador_
 
+call impbienv
+imprimenu:
+call impmenu
+mov ah,8
+int 21h
+;comparo opcion menu
+cmp al,"1"
+je jugar
+cmp al,"2"
+je intrucciones
+cmp al,"3"
+je exit00
+jmp impmenu
+
+intrucciones:
+call impinst
+jmp imprimenu
+
+jugar:
+int 69h
 xor bx,bx
 ;=================================
 ;Cartel inicial
@@ -142,6 +141,8 @@ pre2opcion3:
 call respondio_mal
 jmp pregunta3 
 
+exit00:
+jmp exit
 ;==================================
 pregunta3:
 
@@ -242,6 +243,7 @@ jmp pregunta5
 pre4opcion5:
 call respondio_mal
 jmp pregunta5
+
 
 pregunta5:
 
@@ -380,7 +382,6 @@ opcion2:
 mov dx, offset messipre
 jmp opcion1
 
-
 ;==========================
 ;aca esta lo necesario para imprimir las imagenes
     ; Process BMP file
@@ -394,12 +395,13 @@ opcion1:
 
     ; Wait for key press
     mov ah,1
-;
+
     int 21h
     ; Back to text mode
     mov ah, 0
     mov al, 2
     int 10h
+
 ;================================
 ;aca termina el main
 exit:

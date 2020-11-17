@@ -16,7 +16,6 @@ ErrorMsg db 'Error', 13, 10,'$'
     public ReadPalette
     public CopyPal
     public CopyBitmap
-    
 
 mostrarbmp proc
 
