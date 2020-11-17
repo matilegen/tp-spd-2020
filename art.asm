@@ -104,9 +104,8 @@ re710 db "  ____________________  |_1___|__",24h
 ;respuestas
 p1 db " |     A) es hombre   | ",24h 
 p2 db " |     B) es mujer    | ",24h
-
 ;======================================
-p21 db " |   A) es deportista | ",24h
+p21 db " |   A)es deportista  | ",24h
 p22 db " |   B)es actor       | ",24h
 p23 db " |   C)es cantante    | ",0dh,0ah,24h
 ;========================================
@@ -128,7 +127,7 @@ p62 db " |B)Juega para USA    | ",24h
 p63 db " |C)Juega para Espana | ",0dh,0ah,24h
 ;========================================
 p71 db " |   A)Roger Federer  | ",24h
-p72 db " |   B)Ronaldino      | ",24h
+p72 db " |   B)Lebron James   | ",24h
 p73 db " |   C)Messi          | ",0dh,0ah,24h
 p74 db " |   D)Maluma         | ",0dh,0ah,24h
 p75 db " |   E)Darin          | ",0dh,0ah,24h
@@ -137,6 +136,7 @@ respuestas db 6 dup (24h)
 
 
 .code
+extrn welcomeSnd:proc
 
  public impbienv
  public impmenu
@@ -151,13 +151,15 @@ respuestas db 6 dup (24h)
  public llenador_
  public respondio_bien
  public respondio_mal
- 
+
 impbienv proc
+
     mov ah,9
     mov dx,offset bi00
     int 21h
-
-    mov si, 12
+	;call welcomeSnd
+	
+    mov si, 13
     scroll:
     cmp si, 0
     je scroll_out
@@ -169,28 +171,39 @@ impbienv proc
     dec si
     jmp scroll
     scroll_out:
+
     ret
 impbienv endp
 
 impmenu proc
+
     int 69h
     mov ah,9
     mov dx,offset mnu00
     int 21h
+
     ret
 impmenu endp
 
 impinst proc
+	int 69h
     mov ah,9
     mov dx,offset inst00
     int 21h
 
     mov ah,8
     int 21h
+
     ret
 impinst endp
 
-imppregunta1 proc  
+imppregunta1 proc 
+	push ax
+	push bx
+	push cx
+	push dx
+	push si
+	push di
 ;pregunta 1
 	mov ah,9
 	mov dx,offset pr10
@@ -261,12 +274,24 @@ imppregunta1 proc
 	mov ah,9
 	mov dx,offset tabr1
 	int 21h
-	
+
+	pop di
+	pop si
+	pop dx
+	pop cx
+	pop bx
+	pop ax
 	ret
 imppregunta1 endp
 
 imppregunta2 proc
-    
+    push ax
+	push bx
+	push cx
+	push dx
+	push si
+	push di
+
 int 69h
   xor bx,bx
 ;pregunta 1 
@@ -352,23 +377,37 @@ mov dx,offset re20
 	int 21h
 	mov dx,offset cierre
 	int 21h
+
+	pop di
+	pop si
+	pop dx
+	pop cx
+	pop bx
+	pop ax
 	ret
 imppregunta2 endp
 
 imppregunta3 proc
+	push ax
+	push bx
+	push cx
+	push dx
+	push si
+	push di
+
     xor bx,bx  
-int 69h   
-;pregunta 1 
+	int 69h   
+	;pregunta 1 
     mov ah,9
 	mov dx,offset pr30
 	int 21h  
 	
-;respuesta de la primer pregunta
+	;respuesta de la primer pregunta
 	mov ah,6
 	mov dl,[bx+offset respuestas]
 	int 21h 
 	
-;imprime el resto de la tabla
+	;imprime el resto de la tabla
 	mov ah,9
 	mov dx,offset tabr1
 	int 21h
@@ -377,7 +416,7 @@ int 69h
 	mov dx,offset re13
 	int 21h 
 	
-;imprimo la segunda respuesta si la ahi sino imprimira un "_"
+	;imprimo la segunda respuesta si la ahi sino imprimira un "_"
 	inc bx
 	mov ah,6
 	mov dl,[bx+offset respuestas]
@@ -431,10 +470,24 @@ mov dx,offset re20
 	int 21h
 	mov dx,offset cierre
 	int 21h
+
+	pop di
+	pop si
+	pop dx
+	pop cx
+	pop bx
+	pop ax
 	ret
 imppregunta3 endp
 
 imppregunta4 proc
+	push ax
+	push bx
+	push cx
+	push dx
+	push si
+	push di
+
     xor bx,bx  
 int 69h   
 ;pregunta 1 
@@ -522,10 +575,23 @@ mov dx,offset re20
     int 21h
     mov dx,offset cierre
     int 21h
+
+	pop di
+	pop si
+	pop dx
+	pop cx
+	pop bx
+	pop ax
 	ret
 imppregunta4 endp
 
 imppregunta5 proc  
+	push ax
+	push bx
+	push cx
+	push dx
+	push si
+	push di
 
 int 69h
 ;pregunta 1
@@ -599,12 +665,24 @@ int 69h
 	mov ah,9
 	mov dx,offset tabr1
 	int 21h
-	
+
+	pop di
+	pop si
+	pop dx
+	pop cx
+	pop bx
+	pop ax
 	ret
 imppregunta5 endp
 
 imppregunta6 proc
-    
+    push ax
+	push bx
+	push cx
+	push dx
+	push si
+	push di
+
 int 69h
   xor bx,bx
 ;pregunta 1 
@@ -690,10 +768,24 @@ mov dx,offset re20
 	int 21h
 	mov dx,offset cierre
 	int 21h
+
+	pop di
+	pop si
+	pop dx
+	pop cx
+	pop bx
+	pop ax
 	ret
 imppregunta6 endp
 
 imppregunta7 proc
+	push ax
+	push bx
+	push cx
+	push dx
+	push si
+	push di
+
     xor bx,bx  
 int 69h   
 ;pregunta 1 
@@ -781,19 +873,47 @@ mov dx,offset re20
     int 21h
     mov dx,offset cierre
     int 21h
+
+	pop di
+	pop si
+	pop dx
+	pop cx
+	pop bx
+	pop ax
 	ret
 imppregunta7 endp
 
 colorear proc
+	push ax
+	push bx
+	push cx
+	push dx
+	push si
+	push di
+
     mov ah, 9
     mov al, ""      ;AL = Código del carácter a escribir.
     mov bh, 0       ;BH = Página de vídeo donde escribir el carácter.
     mov bl, 0dh     ;BL = Atributo ó color que va a tener el carácter.
     mov cx, 1       ;CX = Cantidad de veces que se debe escribir el carácter, uno a continuación de otro.
+
+	pop di
+	pop si
+	pop dx
+	pop cx
+	pop bx
+	pop ax
 	ret
 colorear endp
 
 llenador_ proc
+	push ax
+	push bx
+	push cx
+	push dx
+	push si
+	push di
+
     mov cx,8
     xor bx,bx
     cicloresp:
@@ -802,22 +922,64 @@ llenador_ proc
     mov [bx+offset respuestas],al
     inc bx
     loop cicloresp
+
+	pop di
+	pop si
+	pop dx
+	pop cx
+	pop bx
+	pop ax
     ret
 llenador_ endp
 
 respondio_mal proc
+	push ax
+	push bx
+	push cx
+	push dx
+	push si
+	push di
+
     mov al,88
     mov [bx+offset respuestas],al
+
+	pop di
+	pop si
+	pop dx
+	pop cx
+	pop bx
+	pop ax
     ret
 respondio_mal endp
 
 respondio_bien proc
+	push ax
+	push bx
+	push cx
+	push dx
+	push si
+	push di
+
     mov al,86
     mov [bx+offset respuestas],al
+
+	pop di
+	pop si
+	pop dx
+	pop cx
+	pop bx
+	pop ax
     ret
 respondio_bien endp
 
 scroll_down proc
+	push ax
+	push bx
+	push cx
+	push dx
+	push si
+	push di
+
     mov ah, 6               ; http://www.ctyme.com/intr/rb-0097.htm
     mov al, 1               ; number of lines to scroll
     mov bh, 0               ; attribute
@@ -826,6 +988,13 @@ scroll_down proc
     mov dh, 25              ; row bottom
     mov dl, 80              ; col right
     int 10h
+
+	pop di
+	pop si
+	pop dx
+	pop cx
+	pop bx
+	pop ax
     ret
 scroll_down endp
 

@@ -14,6 +14,8 @@ shakirapre db 'shakira.bmp',0
 ursulapre db 'ursula.bmp',0
 scarletpre db 'scarlet.bmp',0
 
+testi db "PERO LA PUTA MADRE", 0dh, 0ah, 24h
+
 .CODE
 ;================================
 extrn impbienv:proc
@@ -26,14 +28,27 @@ extrn imppregunta4:proc
 extrn imppregunta5:proc
 extrn imppregunta6:proc
 extrn imppregunta7:proc
+extrn respMessi1:proc
+extrn respMessi2:proc
+extrn respMessi3:proc
+extrn respMessi4:proc
+extrn respMessi5:proc
+extrn respMessi6:proc
+extrn respMessi7:proc
+extrn respLebron1:proc
+extrn respLebron2:proc
+extrn respLebron3:proc
+extrn respLebron4:proc
+extrn respLebron5:proc
+extrn respLebron6:proc
+extrn respLebron7:proc
 extrn llenador_:proc
-extrn respondio_bien:proc
-extrn respondio_mal:proc
 extrn mostrarbmp:proc
 extrn ReadHeader:proc
 extrn ReadPalette:proc
 extrn CopyPal:proc
 extrn CopyBitmap:proc
+extrn randGen:proc
 ;================================
 proc main 
 mov ax, @data
@@ -44,16 +59,16 @@ mov ds, ax
     int 10h
 ;=================================
 
-;lleno el dup de respuestas
-call llenador_
 
-call impbienv
+         ;LLENO EL DUP DE RESPUESTAS
+
+call impbienv           ;IMPRIMO BIENVENIDA
 imprimenu:
-call impmenu
+call impmenu            ;IMPRIMO MENU
 mov ah,8
 int 21h
-;comparo opcion menu
-cmp al,"1"
+
+cmp al,"1"              ;COMPARO OPCIONES DEL MENU
 je jugar
 cmp al,"2"
 je intrucciones
@@ -61,324 +76,110 @@ cmp al,"3"
 je exit00
 jmp impmenu
 
-intrucciones:
-call impinst
+intrucciones:       
+call impinst            ;IMPRIMO INTRUCCIONES
 jmp imprimenu
 
-jugar:
+jugar:                  ;COMIENZO JUEGO
+call llenador_ 
+call randGen            ;LLAMO RANDOM NUMBER GENERATOR
+cmp dx, 0               ;SI TRAE 0 JUEGO LEBRON
+je juegoLebron
+cmp dx, 1               ;SI TRAE 1 JUEGO MESSI
+je juegoMessi
+jmp jugar
+
+juegoMessi:
 int 69h
 xor bx,bx
-;=================================
-;Cartel inicial
-	mov ah,9
-	;mov dx,offset bi0
-	;int 21h
-;====================================
-call imppregunta1
+;Pregunta 1
+call imppregunta1       ;LLAMO PREGUNTA 1
 mov ah,8
 int 21h
-;=====================================
-;comparo respuesta
-mov bx,0
-cmp al,65
-je pre1opcion1
-cmp al,97
-je pre1opcion1
-cmp al,66
-je pre1opcion2
-cmp al,98
-je pre1opcion2
-;respondio mal
-call respondio_mal
-jmp pregunta2
-;respondio bien
-pre1opcion1:
-call respondio_bien
-jmp pregunta2
-;respondio mal
-pre1opcion2:
-call respondio_mal
-jmp pregunta2 
-
-pregunta2: 
-
- call imppregunta2 
- 
+call respMessi1         ;COMPARO RESPUESTAS
+;Pregunta 2
+call imppregunta2       ;LLAMO PREGUNTA 2
 mov ah,8
 int 21h
-;=====================================
-;comparo respuesta
-mov bx,1
-cmp al,65
-je pre2opcion1
-cmp al,97
-je pre2opcion1
-cmp al,66
-je pre2opcion2
-cmp al,98
-je pre2opcion2
-cmp al,67
-je pre2opcion2
-cmp al,99
-je pre2opcion2
-
-;respondio mal
-call respondio_mal
-jmp pregunta3
-
-;respondio bien
-pre2opcion1:
-call respondio_bien
-jmp pregunta3 
-
-;respondio mal
-pre2opcion2:
-call respondio_mal
-jmp pregunta3
-  
-;respondio mal
-pre2opcion3:
-call respondio_mal
-jmp pregunta3 
+call respMessi2         ;COMPARO RESPUESTAS
+;Pregunta3
+call imppregunta3       ;LLAMO PREGUNTA 3
+mov ah,8
+int 21h
+call respMessi3         ;COMPARO RESPUESTAS
+;Pregunta 4
+call imppregunta4       ;LLAMO PREGUNTA 4
+mov ah,8
+int 21h
+call respMessi4         ;COMPARO RESPUESTAS
+;Pregunta 5
+call imppregunta5       ;LLAMO PREGUNTA 5
+mov ah,8
+int 21h
+call respMessi5         ;COMPARO RESPUESTAS
+;Pregutna 6
+call imppregunta6       ;LLAMO PREGUNTA 6
+mov ah,8
+int 21h
+call respMessi6         ;COMPARO RESPUESTAS
+;Pregunta 7
+call imppregunta7       ;LLAMO PREGUNTA 7
+mov ah,8
+int 21h
+call respMessi7         ;COMPARO RESPUESTAS
+jmp finMessi
 
 exit00:
 jmp exit
-;==================================
-pregunta3:
 
- call imppregunta3 
- 
+juegoLebron:
+int 69h
+xor bx,bx
+;Pregunta 1
+call imppregunta1       ;LLAMO PREGUNTA 1
 mov ah,8
 int 21h
-;=====================================
-;comparo respuesta
-mov bx,2
-cmp al,65
-je pre3opcion1
-cmp al,97
-je pre3opcion1
-cmp al,66
-je pre3opcion2
-cmp al,98
-je pre3opcion2
-cmp al,67
-je pre3opcion2
-cmp al,99
-je pre3opcion2
-
-;respondio mal
-call respondio_mal
-jmp pregunta4
-
-;respondio bien
-pre3opcion1:
-call respondio_bien
-jmp pregunta4 
-
-;respondio mal
-pre3opcion2:
-call respondio_mal
-jmp pregunta4
-  
-;respondio mal
-pre3opcion3:
-call respondio_mal
-jmp pregunta4
-
-pregunta4:
-;=========================
-call imppregunta4
-
+call respLebron1         ;COMPARO RESPUESTAS
+;Pregunta 2
+call imppregunta2       ;LLAMO PREGUNTA 2
 mov ah,8
 int 21h
-;=====================================
-;comparo respuesta
-mov bx,3
-cmp al,65
-je pre4opcion1
-cmp al,97
-je pre4opcion1
-cmp al,66
-je pre4opcion2
-cmp al,98
-je pre4opcion2
-cmp al,67
-je pre4opcion3
-cmp al,99
-je pre4opcion3
-cmp al,68
-je pre4opcion4
-cmp al,100
-je pre4opcion4
-cmp al,69
-je pre4opcion5
-cmp al,101
-je pre4opcion5
-
-;respondio mal
-call respondio_mal
-jmp pregunta5
-
-;respondio bien
-pre4opcion1:
-call respondio_bien
-jmp pregunta5 
-
-;respondio mal
-pre4opcion2:
-call respondio_mal
-jmp pregunta5
-  
-;respondio mal
-pre4opcion3:
-call respondio_mal
-jmp pregunta5
-
-;respondio mal
-pre4opcion4:
-call respondio_mal
-jmp pregunta5
-
-;respondio mal
-pre4opcion5:
-call respondio_mal
-jmp pregunta5
-
-
-pregunta5:
-
-call imppregunta5
-
+call respLebron2         ;COMPARO RESPUESTAS
+;Pregunta3
+call imppregunta3       ;LLAMO PREGUNTA 3
 mov ah,8
 int 21h
-;=====================================
-;comparo respuesta
-mov bx,4
-cmp al,65
-je pre5opcion1
-cmp al,97
-je pre5opcion1
-cmp al,66
-je pre5opcion2
-cmp al,98
-je pre5opcion2
-
-;respondio mal
-call respondio_mal
-jmp pregunta6
-
-;respondio mal
-pre5opcion1:
-call respondio_mal
-jmp pregunta6
-
-;respondio bien
-pre5opcion2:
-call respondio_bien
-jmp pregunta6 
-
-pregunta6:
-
-call imppregunta6
-
+call respLebron3         ;COMPARO RESPUESTAS
+;Pregunta 4
+call imppregunta4       ;LLAMO PREGUNTA 4
 mov ah,8
 int 21h
-;=====================================
-;comparo respuesta
-mov bx,5
-cmp al,65
-je pre6opcion1
-cmp al,97
-je pre6opcion1
-cmp al,66
-je pre6opcion2
-cmp al,98
-je pre6opcion2
-cmp al,67
-je pre6opcion2
-cmp al,99
-je pre6opcion2
-
-;respondio mal
-call respondio_mal
-jmp pregunta7
-
-;respondio mal
-pre6opcion1:
-call respondio_mal
-jmp pregunta7 
-
-;respondio mal
-pre6opcion2:
-call respondio_mal
-jmp pregunta7
-  
-;respondio bien
-pre6opcion3:
-call respondio_bien
-jmp pregunta7
-
-pregunta7:
-
-call imppregunta7
-
+call respLebron4         ;COMPARO RESPUESTAS
+;Pregunta 5
+call imppregunta5       ;LLAMO PREGUNTA 5
 mov ah,8
 int 21h
-;=====================================
-;comparo respuesta
-mov bx,6
-cmp al,65
-je pre7opcion1
-cmp al,97
-je pre7opcion1
-cmp al,66
-je pre7opcion2
-cmp al,98
-je pre7opcion2
-cmp al,67
-je pre7opcion3
-cmp al,99
-je pre7opcion3
-cmp al,68
-je pre7opcion4
-cmp al,100
-je pre7opcion4
-cmp al,69
-je pre7opcion5
-cmp al,101
-je pre7opcion5
+call respLebron5         ;COMPARO RESPUESTAS
+;Pregutna 6
+call imppregunta6       ;LLAMO PREGUNTA 6
+mov ah,8
+int 21h
+call respLebron6         ;COMPARO RESPUESTAS
+;Pregunta 7
+call imppregunta7       ;LLAMO PREGUNTA 7
+mov ah,8
+int 21h
+call respLebron7         ;COMPARO RESPUESTAS
+mov ah,9
+lea dx, testi
+int 21h
+jmp finLebron
 
-;respondio mal
-call respondio_mal
-jmp opcion2
+finLebron:
+mov dx, offset janespre
+jmp opcion1
 
-;respondio mal
-pre7opcion1:
-;call respondio_mal
-jmp opcion2 
-
-;respondio mal
-pre7opcion2:
-;call respondio_mal
-jmp opcion2
-  
-;respondio bien
-pre7opcion3:
-;call respondio_bien
-jmp opcion2
-
-;respondio mal
-pre7opcion4:
-;call respondio_mal
-jmp opcion2
-
-;respondio mal
-pre7opcion5:
-;call respondio_mal
-jmp opcion2
-
-
-opcion2:
+finMessi:
 mov dx, offset messipre
 jmp opcion1
 
@@ -387,6 +188,8 @@ jmp opcion1
     ; Process BMP file
 	
 opcion1:
+    int 69h
+
     call mostrarbmp
     call ReadHeader
     call ReadPalette
@@ -395,19 +198,15 @@ opcion1:
 
     ; Wait for key press
     mov ah,1
-
     int 21h
-    ; Back to text mode
-    mov ah, 0
-    mov al, 2
-    int 10h
 
-;================================
+    ;Vuelvo al menu
+    jmp imprimenu
+
 ;aca termina el main
 exit:
     mov ax, 4c00h
     int 21h
-
 main endp 
 
 end main
