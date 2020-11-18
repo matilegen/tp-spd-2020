@@ -17,6 +17,14 @@ bi09 db "   | ___||  |  ||_   _||   \ |   |",0dh,0ah
 bi10 db "   | ___||     | _| |_ | -- || - |",0dh,0ah
 bi11 db "   |____||_|___||_____||___/ |___|",0dh,0ah,24h
 
+inst00 db "     Instrucciones del quien soy",0dh,0ah
+inst01 db 0dh, 0ah
+inst02 db "El juego consta de adivinar el personajeque la computadora personifica.", 0dh, 0ah, 0ah
+inst03 db "Le vamos a realizar 6 preguntas, donde  ustes eligira la opcion que crea que    corresponda.", 0dh, 0ah, 0ah
+inst04 db "Se le informara si la opcion es correctao incorrecta y podra ver sus respuestas.",0dh,0ah
+inst05 db "Luego de las preguntas se le daran      opciones sobre quien es el presonaje y  usted debe de adivinarlo.", 0dh, 0ah, 0ah
+inst06 db "Presione una tecla para continuar", 0dh, 0ah, 24h
+
 mnu00 db "   +------------------------------+", 0ah ,0dh
 mnu01 db "   +------------------------------+", 0ah ,0dh
 mnu02 db "   |    ____        _   __        |", 0ah ,0dh
@@ -40,20 +48,11 @@ mnu19 db "1.   Jugar                                                            
 mnu20 db "2.   Intrucciones                                                              ", 0ah, 0dh
 mnu21 db "3.   Salir                                                                     ", 0ah, 0dh,24h
 
-inst00 db "     Instrucciones del quien soy",0dh,0ah
-inst01 db 0dh, 0ah
-inst02 db "El juego consta de adivinar el personajeque la computadora personifica.", 0dh, 0ah, 0ah
-inst03 db "Le vamos a realizar 6 preguntas, donde  ustes eligira la opcion que crea que    corresponda.", 0dh, 0ah, 0ah
-inst04 db "Se le informara si la opcion es correctao incorrecta y podra ver sus respuestas.",0dh,0ah
-inst05 db "Luego de las preguntas se le daran opciones sobre quien es el presonaje y usted debe de adivinarlo.", 0dh, 0ah, 0ah
-inst06 db "Presione una tecla para continuar", 0dh, 0ah, 24h
-
-
-
 pr10 db "  ____________________   ___________ ",0dh,0ah
 pr13 db " |      pregunta 1    | |preg.|resp.|",0dh,0ah
 pr15 db " |____________________|  -----------",0dh,0ah 
 re10 db "  ____________________  |_1___|__",24h
+cierre db " |____________________| ",0dh,0ah,24h   
 
 tabr1 db "__|",0dh,0ah,24h
 re13 db "|_2___|__",24h
@@ -63,44 +62,36 @@ re20 db "  ____________________  |_4___|__",24h
 re23 db "|_5___|__",24h
 re25 db "|_6___|__",24H
 
-;===================================
 pr20 db "  ____________________   ___________ ",0dh,0ah
 pr23 db " |      pregunta 2    | |preg.|resp.|",0dh,0ah
 pr25 db " |____________________|  -----------",0dh,0ah                                     
 re210 db "  ____________________  |_1___|__",24h  
-cierre db " |____________________| ",0dh,0ah,24h                                   
 
-;===================================
 pr30 db "  ____________________   ___________ ",0dh,0ah
 pr33 db " |      pregunta 3    | |preg.|resp.|",0dh,0ah
 pr35 db " |____________________|  -----------",0dh,0ah                                     
 re310 db "  ____________________  |_1___|__",24h  
 
-;===================================
 pr40 db "  ____________________   ___________ ",0dh,0ah
 pr43 db " |      pregunta 4    | |preg.|resp.|",0dh,0ah
 pr45 db " |____________________|  -----------",0dh,0ah                                     
 re410 db "  ____________________  |_1___|__",24h  
 
-;===================================
 pr50 db "  ____________________   ___________ ",0dh,0ah
 pr53 db " |      pregunta 5    | |preg.|resp.|",0dh,0ah
 pr55 db " |____________________|  -----------",0dh,0ah                                     
 re510 db "  ____________________  |_1___|__",24h  
 
-;===================================
 pr60 db "  ____________________   ___________ ",0dh,0ah
 pr63 db " |      pregunta 6    | |preg.|resp.|",0dh,0ah
 pr65 db " |____________________|  -----------",0dh,0ah                                     
 re610 db "  ____________________  |_1___|__",24h  
 
-;===================================
 pr70 db "  ____________________   ___________ ",0dh,0ah
-pr73 db " |     ¿Quien Soy?    | |preg.|resp.|",0dh,0ah
+pr73 db " |     Quien Soy?     | |preg.|resp.|",0dh,0ah
 pr75 db " |____________________|  -----------",0dh,0ah                                     
 re710 db "  ____________________  |_1___|__",24h  
 
-;===================================
 ;respuestas
 p1 db " |     A) es hombre   | ",24h 
 p2 db " |     B) es mujer    | ",24h
@@ -119,18 +110,18 @@ p43 db " |   C)Suizo          | ",0dh,0ah,24h
 p44 db " |   D)Brazilero      | ",0dh,0ah,24h
 p45 db " |   E)Norteamiricano | ",0dh,0ah,24h
 ;========================================
-p51 db " |A)juega por su pais | ",24h
+p51 db " |A)Juega por su pais | ",24h
 p52 db " |B)No lo hace        | ",24h
 ;========================================
-p61 db " |A)Juega para Italia | ",24h
-p62 db " |B)Juega para USA    | ",24h
-p63 db " |C)Juega para Espana | ",0dh,0ah,24h
+p61 db " |A)Juega en Italia   | ",24h
+p62 db " |B)Juega en USA      | ",24h
+p63 db " |C)Juega en Espana   | ",0dh,0ah,24h
 ;========================================
 p71 db " |   A)Roger Federer  | ",24h
 p72 db " |   B)Lebron James   | ",24h
 p73 db " |   C)Messi          | ",0dh,0ah,24h
 p74 db " |   D)Maluma         | ",0dh,0ah,24h
-p75 db " |   E)Darin          | ",0dh,0ah,24h
+p75 db " |   E)Ronaldo        | ",0dh,0ah,24h
 
 respuestas db 6 dup (24h)
 
@@ -179,7 +170,7 @@ impmenu proc
 
     int 69h
     mov ah,9
-    mov dx,offset mnu00
+    mov dx,offset mnu02
     int 21h
 
     ret
@@ -204,11 +195,11 @@ imppregunta1 proc
 	push dx
 	push si
 	push di
+	int 69h
 ;pregunta 1
 	mov ah,9
 	mov dx,offset pr10
 	int 21h  
-	;call colorear
 	
 ;respuesta de la primer pregunta
 	mov ah,6
@@ -292,20 +283,18 @@ imppregunta2 proc
 	push si
 	push di
 
-int 69h
-  xor bx,bx
+	int 69h
+  	xor bx,bx
+
 ;pregunta 1 
     mov ah,9
 	mov dx,offset pr20
 	int 21h  
-	push bx
-	call colorear
-	pop bx
 ;respuesta de la primer pregunta
 	mov ah,6
 	mov dl,[bx+offset respuestas]
 	int 21h 
-	
+
 ;imprime el resto de la tabla
 	mov ah,9
 	mov dx,offset tabr1
@@ -336,10 +325,10 @@ int 69h
 	mov ah,9
 	mov dx,offset tabr1
 	int 21h
-mov dx,offset re20
+	mov dx,offset re20
 	int 21h
 	
-;call colorear
+
 	inc bx
 	mov ah,6
 	mov dl,[bx+offset respuestas]
@@ -352,7 +341,7 @@ mov dx,offset re20
 	mov dx,offset re23
 	int 21h
 
-;call colorear
+
 	inc bx
 	mov ah,6
 	mov dl,[bx+offset respuestas]
@@ -365,7 +354,7 @@ mov dx,offset re20
 	mov dx,offset re25
 	int 21h
 
-;call colorear
+
 	inc bx
 	mov ah,6
 	mov dl,[bx+offset respuestas]
@@ -435,7 +424,7 @@ imppregunta3 proc
 	mov ah,9
 	mov dx,offset tabr1
 	int 21h
-mov dx,offset re20
+	mov dx,offset re20
 	int 21h
 	inc bx
 	mov ah,6
@@ -489,7 +478,7 @@ imppregunta4 proc
 	push di
 
     xor bx,bx  
-int 69h   
+	int 69h   
 ;pregunta 1 
     mov ah,9
 	mov dx,offset pr40
@@ -528,7 +517,7 @@ int 69h
 	mov ah,9
 	mov dx,offset tabr1
 	int 21h
-mov dx,offset re20
+	mov dx,offset re20
 	int 21h
 	inc bx
 	mov ah,6
@@ -593,7 +582,7 @@ imppregunta5 proc
 	push si
 	push di
 
-int 69h
+	int 69h
 ;pregunta 1
     xor bx,bx
 	mov ah,9
@@ -683,14 +672,14 @@ imppregunta6 proc
 	push si
 	push di
 
-int 69h
+	int 69h
   xor bx,bx
 ;pregunta 1 
     mov ah,9
 	mov dx,offset pr60
 	int 21h  
 	push bx
-	call colorear
+	;call colorear
 	pop bx
 ;respuesta de la primer pregunta
 	mov ah,6
@@ -787,7 +776,7 @@ imppregunta7 proc
 	push di
 
     xor bx,bx  
-int 69h   
+	int 69h   
 ;pregunta 1 
     mov ah,9
 	mov dx,offset pr70
@@ -826,7 +815,7 @@ int 69h
 	mov ah,9
 	mov dx,offset tabr1
 	int 21h
-mov dx,offset re20
+	mov dx,offset re20
 	int 21h
 	inc bx
 	mov ah,6
@@ -883,7 +872,21 @@ mov dx,offset re20
 	ret
 imppregunta7 endp
 
-colorear proc
+color_rojo proc
+
+	push bx
+
+	mov ah, 09
+    mov al, "X"     ;AL = Código del carácter a escribir.
+	mov bx, 000ch	;BH = Página BL =Color.
+    mov cx, 10       ;CX = Cantidad de veces.
+	int 10h
+
+	pop bx
+	ret
+color_rojo endp
+
+color_verde proc
 	push ax
 	push bx
 	push cx
@@ -891,11 +894,11 @@ colorear proc
 	push si
 	push di
 
-    mov ah, 9
-    mov al, ""      ;AL = Código del carácter a escribir.
-    mov bh, 0       ;BH = Página de vídeo donde escribir el carácter.
-    mov bl, 0dh     ;BL = Atributo ó color que va a tener el carácter.
-    mov cx, 1       ;CX = Cantidad de veces que se debe escribir el carácter, uno a continuación de otro.
+	mov ah, 9
+    mov al, "V"      ;AL = Código del carácter a escribir.
+	mov bx, 000ah
+    mov cx, 10       ;CX = Cantidad de veces que se debe escribir el carácter
+	int 10h
 
 	pop di
 	pop si
@@ -904,7 +907,7 @@ colorear proc
 	pop bx
 	pop ax
 	ret
-colorear endp
+color_verde endp
 
 llenador_ proc
 	push ax
@@ -933,42 +936,17 @@ llenador_ proc
 llenador_ endp
 
 respondio_mal proc
-	push ax
-	push bx
-	push cx
-	push dx
-	push si
-	push di
-
     mov al,88
     mov [bx+offset respuestas],al
 
-	pop di
-	pop si
-	pop dx
-	pop cx
-	pop bx
-	pop ax
     ret
 respondio_mal endp
 
 respondio_bien proc
-	push ax
-	push bx
-	push cx
-	push dx
-	push si
-	push di
-
     mov al,86
     mov [bx+offset respuestas],al
 
-	pop di
-	pop si
-	pop dx
-	pop cx
-	pop bx
-	pop ax
+
     ret
 respondio_bien endp
 
@@ -997,5 +975,4 @@ scroll_down proc
 	pop ax
     ret
 scroll_down endp
-
 end

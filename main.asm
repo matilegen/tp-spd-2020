@@ -3,18 +3,17 @@
 .STACK 128h
 .DATA
 ;================================ Archivos
-messipre db 'messi.bmp',0
+
 darinpre db 'darin.bmp',0
 cristianpre db 'cristian.bmp',0
 braddpre db 'Bradd.bmp',0
 janespre db 'janes.bmp',0
+messipre db 'messi.bmp',0
 malumapre db 'maluma.bmp',0
 rogerfpre db 'rogerf.bmp',0
 shakirapre db 'shakira.bmp',0
 ursulapre db 'ursula.bmp',0
 scarletpre db 'scarlet.bmp',0
-
-testi db "PERO LA PUTA MADRE", 0dh, 0ah, 24h
 
 .CODE
 ;================================
@@ -42,6 +41,13 @@ extrn respLebron4:proc
 extrn respLebron5:proc
 extrn respLebron6:proc
 extrn respLebron7:proc
+extrn respRonaldo1:proc
+extrn respRonaldo2:proc
+extrn respRonaldo3:proc
+extrn respRonaldo4:proc
+extrn respRonaldo5:proc
+extrn respRonaldo6:proc
+extrn respRonaldo7:proc
 extrn llenador_:proc
 extrn mostrarbmp:proc
 extrn ReadHeader:proc
@@ -53,14 +59,13 @@ extrn randGen:proc
 proc main 
 mov ax, @data
 mov ds, ax
+
+
 ;================================
     ; Graphic mode
-    mov ax, 13h
+    mov ax, 0013h
     int 10h
 ;=================================
-
-
-         ;LLENO EL DUP DE RESPUESTAS
 
 call impbienv           ;IMPRIMO BIENVENIDA
 imprimenu:
@@ -74,7 +79,7 @@ cmp al,"2"
 je intrucciones
 cmp al,"3"
 je exit00
-jmp impmenu
+jmp imprimenu
 
 intrucciones:       
 call impinst            ;IMPRIMO INTRUCCIONES
@@ -84,13 +89,14 @@ jugar:                  ;COMIENZO JUEGO
 call llenador_ 
 call randGen            ;LLAMO RANDOM NUMBER GENERATOR
 cmp dx, 0               ;SI TRAE 0 JUEGO LEBRON
-je juegoLebron
-cmp dx, 1               ;SI TRAE 1 JUEGO MESSI
 je juegoMessi
+cmp dx, 1               ;SI TRAE 1 JUEGO MESSI
+je juegoLebron
+cmp dx, 2
+je juegoRonaldo0
 jmp jugar
 
 juegoMessi:
-int 69h
 xor bx,bx
 ;Pregunta 1
 call imppregunta1       ;LLAMO PREGUNTA 1
@@ -131,9 +137,10 @@ jmp finMessi
 
 exit00:
 jmp exit
+juegoRonaldo0:
+jmp juegoRonaldo
 
 juegoLebron:
-int 69h
 xor bx,bx
 ;Pregunta 1
 call imppregunta1       ;LLAMO PREGUNTA 1
@@ -170,17 +177,63 @@ call imppregunta7       ;LLAMO PREGUNTA 7
 mov ah,8
 int 21h
 call respLebron7         ;COMPARO RESPUESTAS
-mov ah,9
-lea dx, testi
-int 21h
 jmp finLebron
+
+juegoRonaldo:
+xor bx,bx
+;Pregunta 1
+call imppregunta1       ;LLAMO PREGUNTA 1
+mov ah,8
+int 21h
+call respRonaldo1         ;COMPARO RESPUESTAS
+;Pregunta 2
+call imppregunta2       ;LLAMO PREGUNTA 2
+mov ah,8
+int 21h
+call respRonaldo2         ;COMPARO RESPUESTAS
+;Pregunta3
+call imppregunta3       ;LLAMO PREGUNTA 3
+mov ah,8
+int 21h
+call respRonaldo3         ;COMPARO RESPUESTAS
+;Pregunta 4
+call imppregunta4       ;LLAMO PREGUNTA 4
+mov ah,8
+int 21h
+call respRonaldo4         ;COMPARO RESPUESTAS
+;Pregunta 5
+call imppregunta5       ;LLAMO PREGUNTA 5
+mov ah,8
+int 21h
+call respRonaldo5         ;COMPARO RESPUESTAS
+;Pregutna 6
+call imppregunta6       ;LLAMO PREGUNTA 6
+mov ah,8
+int 21h
+call respRonaldo6         ;COMPARO RESPUESTAS
+;Pregunta 7
+call imppregunta7       ;LLAMO PREGUNTA 7
+mov ah,8
+int 21h
+call respRonaldo7         ;COMPARO RESPUESTAS
+jmp finRonaldo
+
+finMessi:
+mov ax, 13h
+int 10h
+int 69h
+mov dx, offset messipre
+jmp opcion1
 
 finLebron:
 mov dx, offset janespre
 jmp opcion1
 
-finMessi:
-mov dx, offset messipre
+finRonaldo:
+mov ax, 13h
+int 10h
+int 69h
+mov dx, offset cristianpre
 jmp opcion1
 
 ;==========================
@@ -188,8 +241,7 @@ jmp opcion1
     ; Process BMP file
 	
 opcion1:
-    int 69h
-
+    
     call mostrarbmp
     call ReadHeader
     call ReadPalette
@@ -201,7 +253,7 @@ opcion1:
     int 21h
 
     ;Vuelvo al menu
-    mov ax, 13h
+    mov ax, 0013h
     int 10h
 
     jmp imprimenu

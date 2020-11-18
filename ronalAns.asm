@@ -8,15 +8,15 @@ extrn respondio_mal:proc
 extrn winSnd:proc
 extrn lossSnd:proc
 
-    public respMessi1
-    public respMessi2
-    public respMessi3
-    public respMessi4
-    public respMessi5
-    public respMessi6
-    public respMessi7
+    public respRonaldo1
+    public respRonaldo2
+    public respRonaldo3
+    public respRonaldo4
+    public respRonaldo5
+    public respRonaldo6
+    public respRonaldo7
 
-respMessi1 proc
+respRonaldo1 proc
     mov bx,0
     cmp al,65
     je pre1opcion1
@@ -44,9 +44,9 @@ respMessi1 proc
     pregunta2:
 
     ret   
-respMessi1 endp
+respRonaldo1 endp
 
-respMessi2 proc
+respRonaldo2 proc
     mov bx,1
     cmp al,65
     je pre2opcion1
@@ -83,9 +83,9 @@ respMessi2 proc
     pregunta3:
 
     ret
-respMessi2 endp
+respRonaldo2 endp
 
-respMessi3 proc
+respRonaldo3 proc
     mov bx,2
     cmp al,65
     je pre3opcion1
@@ -122,9 +122,9 @@ respMessi3 proc
     pregunta4:
 
     ret
-respMessi3 endp
+respRonaldo3 endp
 
-respMessi4 proc
+respRonaldo4 proc
     mov bx,3
     cmp al,65
     je pre4opcion1
@@ -151,14 +151,14 @@ respMessi4 proc
     call respondio_mal
     jmp pregunta5
 
-    ;respondio bien
+    ;respondio mal
     pre4opcion1:
-    call respondio_bien
+    call respondio_mal
     jmp pregunta5 
 
-    ;respondio mal
+    ;respondio bien
     pre4opcion2:
-    call respondio_mal
+    call respondio_bien
     jmp pregunta5
   
     ;respondio mal
@@ -178,9 +178,9 @@ respMessi4 proc
 
     pregunta5:
     ret
-respMessi4 endp
+respRonaldo4 endp
 
-respMessi5 proc
+respRonaldo5 proc
     mov bx,4
     cmp al,65
     je pre5opcion1
@@ -195,22 +195,22 @@ respMessi5 proc
     call respondio_mal
     jmp pregunta6
 
-    ;respondio mal
+    ;respondio bien
     pre5opcion1:
-    call respondio_mal
+    call respondio_bien
     jmp pregunta6
 
-    ;respondio bien
+    ;respondio mal
     pre5opcion2:
-    call respondio_bien
+    call respondio_mal
     jmp pregunta6 
 
     pregunta6:
 
     ret
-respMessi5 endp
+respRonaldo5 endp
 
-respMessi6 proc
+respRonaldo6 proc
     mov bx,5
     cmp al,65
     je pre6opcion1
@@ -229,9 +229,9 @@ respMessi6 proc
     call respondio_mal
     jmp pregunta7
 
-    ;respondio mal
+    ;respondio bien
     pre6opcion1:
-    call respondio_mal
+    call respondio_bien
     jmp pregunta7 
 
     ;respondio mal
@@ -241,15 +241,15 @@ respMessi6 proc
   
     ;respondio mal
     pre6opcion3:
-    call respondio_bien
+    call respondio_mal
     jmp pregunta7
 
     pregunta7:
 
     ret
-respMessi6 endp
+respRonaldo6 endp
 
-respMessi7 proc
+respRonaldo7 proc
     mov bx,6
     cmp al,65
     je pre7opcion1
@@ -286,9 +286,9 @@ respMessi7 proc
     call lossSnd
     jmp final
   
-    ;respondio bien
+    ;respondio mal
     pre7opcion3:
-    call winSnd
+    call lossSnd
     jmp final
 
     ;respondio mal
@@ -296,13 +296,13 @@ respMessi7 proc
     call lossSnd
     jmp final
 
-    ;respondio mal
+    ;respondio bien
     pre7opcion5:
-    call lossSnd
+    call winSnd
     jmp final
 
     final:
     ret
-respMessi7 endp
+respRonaldo7 endp
 
 end         
