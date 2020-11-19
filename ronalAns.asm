@@ -17,6 +17,12 @@ extrn lossSnd:proc
     public respRonal7
 
 respRonal1 proc
+    push ax
+    push bx
+    push cx
+    push dx
+    push si
+    push di
     mov bx,0
     cmp al,65
     je pre1opcion1
@@ -42,10 +48,22 @@ respRonal1 proc
     jmp pregunta2
 
     pregunta2:
+    pop di
+    pop si
+    pop dx
+    pop cx
+    pop bx
+    pop ax
     ret   
 respRonal1 endp
 
 respRonal2 proc
+    push ax
+    push bx
+    push cx
+    push dx
+    push si
+    push di
     mov bx,1
     cmp al,65
     je pre2opcion1
@@ -80,10 +98,22 @@ respRonal2 proc
     jmp pregunta3 
 
     pregunta3:
+    pop di
+    pop si
+    pop dx
+    pop cx
+    pop bx
+    pop ax
     ret
 respRonal2 endp
 
 respRonal3 proc
+    push ax
+    push bx
+    push cx
+    push dx
+    push si
+    push di
     mov bx,2
     cmp al,65
     je pre3opcion1
@@ -118,17 +148,22 @@ respRonal3 proc
     jmp pregunta4
 
     pregunta4:
-
+    pop di
+    pop si
+    pop dx
+    pop cx
+    pop bx
+    pop ax
     ret
 respRonal3 endp
 
 respRonal4 proc
     push ax
-	push bx
-	push cx
-	push dx
-	push si
-	push di
+    push bx
+    push cx
+    push dx
+    push si
+    push di
     mov bx,3
     cmp al,65
     je pre4opcion1
@@ -182,21 +217,21 @@ respRonal4 proc
 
     pregunta5:
     pop di
-	pop si
-	pop dx
-	pop cx
-	pop bx
-	pop ax
+    pop si
+    pop dx
+    pop cx
+    pop bx
+    pop ax
     ret
 respRonal4 endp
 
 respRonal5 proc
     push ax
-	push bx
-	push cx
-	push dx
-	push si
-	push di
+    push bx
+    push cx
+    push dx
+    push si
+    push di
     mov bx,4
     cmp al,65
     je pre5opcion1
@@ -223,11 +258,11 @@ respRonal5 proc
 
     pregunta6:
     pop di
-	pop si
-	pop dx
-	pop cx
-	pop bx
-	pop ax
+    pop si
+    pop dx
+    pop cx
+    pop bx
+    pop ax
     ret
 respRonal5 endp
 
@@ -238,6 +273,7 @@ respRonal6 proc
 	push dx
 	push si
 	push di
+
     mov bx,5
     cmp al,65
     je pre6opcion1
@@ -312,42 +348,42 @@ respRonal7 proc
     je pre7opcion5
 
     ;respondio mal
-    call lossSnd        ;(en snd.asm)
-    jmp fin
+    call lossSnd        ;(en lib.asm)
+    jmp fino
 
     ;respondio mal
     pre7opcion1:
-    call lossSnd        ;(en snd.asm)
-    jmp fin 
+    call lossSnd        ;(en lib.asm)
+    jmp fino 
 
     ;respondio mal
     pre7opcion2:
-    call lossSnd        ;(en snd.asm)
-    jmp fin
+    call lossSnd        ;(en lib.asm)
+    jmp fino
   
     ;respondio mal
     pre7opcion3:
-    call lossSnd        ;(en snd.asm)
-    jmp fin
+    call lossSnd        ;(en lib.asm)
+    jmp fino
 
     ;respondio mal
     pre7opcion4:
-    call lossSnd        ;(en snd.asm)
-    jmp fin
+    call lossSnd        ;(en lib.asm)
+    jmp fino
 
     ;respondio bien
     pre7opcion5:
-    call winSnd         ;(en snd.asm)
-    jmp fin
+    call winSnd         ;(en lib.asm)
+    jmp fino
 
-    fin:
+    fino:
     pop di
 	pop si
 	pop dx
 	pop cx
 	pop bx
 	pop ax
-    ret
+    ret 2
 respRonal7 endp
 
 end         

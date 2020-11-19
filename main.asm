@@ -89,7 +89,6 @@ xor cx, cx
 xor dx, dx
 call llenador_          ;(en art.asm)
 call randGen            ;LLAMO RANDOM NUMBER GENERATOR
-;mov dx, 2
 cmp dx, 0               ;SI TRAE 0 JUEGO MESSI
 je juegoMessi
 cmp dx, 1               ;SI TRAE 1 JUEGO LEBRON
