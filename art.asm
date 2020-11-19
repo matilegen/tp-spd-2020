@@ -148,7 +148,7 @@ impbienv proc
     mov ah,9
     mov dx,offset bi00
     int 21h
-	;call welcomeSnd		;(en lib.asm)
+	call welcomeSnd		;(en lib.asm)
 	
     mov si, 13
     scroll:

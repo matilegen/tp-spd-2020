@@ -1,4 +1,4 @@
-; Programa TSR que se instala en el vector de interrupciones 69h
+; Programa TSR que se instala en el vector de interrupciones 80h
 ; Limpia pantalla y posiciona cursor al inicio
 
 .8086
@@ -76,13 +76,13 @@ main:
 	push ES
 
 InstalarInt:
-    mov AX,3569h        ; Obtiene la ISR que esta instalada en la interrupcion
+    mov AX,3580h        ; Obtiene la ISR que esta instalada en la interrupcion
     int 21h    
          
     mov DespIntXX,BX    
     mov SegIntXX,ES
 
-    mov AX,2569h	; Coloca la nueva ISR en el vector de interrupciones
+    mov AX,2580h	; Coloca la nueva ISR en el vector de interrupciones
     mov DX,Offset Funcion 
     int 21h
 

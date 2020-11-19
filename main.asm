@@ -10,6 +10,7 @@ messipre db 'messi.bmp',0
 a2 db 255 dup ("$")
 cristianpre db 'cristian.bmp',0
 a3 db 255 dup ("$")
+
 .CODE
 ;================================
 extrn impbienv:proc
@@ -228,7 +229,7 @@ jmp opcion1
 finRonal:
 ;mov ax, 13h
 ;int 10h
-;int 80h
+int 80h
 mov dx, offset cristianpre
 jmp opcion1
 

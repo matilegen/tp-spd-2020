@@ -317,6 +317,7 @@ respLebron6 proc
 respLebron6 endp
 
 respLebron7 proc
+
     mov bx,6
     cmp al,65
     je pre7opcion1
@@ -369,7 +370,6 @@ respLebron7 proc
     jmp final
 
     final:
-
     ret 
 respLebron7 endp
 

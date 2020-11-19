@@ -288,6 +288,7 @@ respRonal7 proc
 	push dx
 	push si
 	push di
+
     mov bx,6
     cmp al,65
     je pre7opcion1
@@ -312,34 +313,34 @@ respRonal7 proc
 
     ;respondio mal
     call lossSnd        ;(en snd.asm)
-    jmp final
+    jmp fin
 
     ;respondio mal
     pre7opcion1:
     call lossSnd        ;(en snd.asm)
-    jmp final 
+    jmp fin 
 
     ;respondio mal
     pre7opcion2:
     call lossSnd        ;(en snd.asm)
-    jmp final
+    jmp fin
   
     ;respondio mal
     pre7opcion3:
     call lossSnd        ;(en snd.asm)
-    jmp final
+    jmp fin
 
     ;respondio mal
     pre7opcion4:
     call lossSnd        ;(en snd.asm)
-    jmp final
+    jmp fin
 
     ;respondio bien
     pre7opcion5:
     call winSnd         ;(en snd.asm)
-    jmp final
+    jmp fin
 
-    final:
+    fin:
     pop di
 	pop si
 	pop dx
