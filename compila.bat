@@ -1,14 +1,12 @@
 @ECHO OFF
 tasm tsr
-tasm main
-tasm art
-tasm lib
-tasm snd
-tasm messiAns
-tasm jamesAns
-tasm ronalAns
 tlink /t tsr
-tlink main art lib snd messiAns jamesAns ronalAns 
 tsr
+tasm main
+tasm lib
+tasm art
+tasm jamesans
+tasm ans
+tlink main art lib jamesans ans
 main
 PAUSE

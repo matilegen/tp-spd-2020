@@ -146,7 +146,7 @@ randGen proc
 
     mov ax, dx
     xor dx, dx
-    mov cx, 2
+    mov cx, 3
     div cx
 
     ret 

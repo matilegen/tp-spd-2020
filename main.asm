@@ -5,12 +5,9 @@
 ;================================ Archivos
 a0 db 255 dup ("$")
 janespre db 'janes.bmp',0
-a1 db 255 dup ("$")
 messipre db 'messi.bmp',0
-a2 db 255 dup ("$")
 cristianpre db 'cristian.bmp',0
 a3 db 255 dup ("$")
-
 .CODE
 ;================================
 extrn impbienv:proc
@@ -88,10 +85,10 @@ call randGen            ;LLAMO RANDOM NUMBER GENERATOR (en lib.asm)
 ;mov dx, 1
 cmp dx, 0               ;SI TRAE 0 JUEGO MESSI
 je juegoMessi
-cmp dx, 2               ;SI TRAE 1 JUEGO LEBRON
+cmp dx, 2               ;SI TRAE 2 JUEGO LEBRON
 je juegoLebron0
 cmp dx, 1
-je juegoRonal        ;SI TRAE 2 JUEGO RONAL
+je juegoRonal        ;SI TRAE 1 JUEGO RONAL
 jmp jugar
 
 juegoMessi:
@@ -99,37 +96,37 @@ juegoMessi:
 call imppregunta1       ;LLAMO PREGUNTA 1 (en art.asm)
 mov ah,8
 int 21h
-call respMessi1         ;COMPARO RESPUESTAS (en messiAns.asm)
+call respMessi1         ;COMPARO RESPUESTAS (en ans.asm)
 ;Pregunta 2
 call imppregunta2       ;LLAMO PREGUNTA 2 (en art.asm)
 mov ah,8
 int 21h
-call respMessi2         ;COMPARO RESPUESTAS (en messiAns.asm)
+call respMessi2         ;COMPARO RESPUESTAS (en ans.asm)
 ;Pregunta3
 call imppregunta3       ;LLAMO PREGUNTA 3 (en arte.asm)
 mov ah,8
 int 21h
-call respMessi3         ;COMPARO RESPUESTAS (en messiAns.asm)
+call respMessi3         ;COMPARO RESPUESTAS (en ans.asm)
 ;Pregunta 4
 call imppregunta4       ;LLAMO PREGUNTA 4 (en art.asm)
 mov ah,8
 int 21h
-call respMessi4         ;COMPARO RESPUESTAS (en messiAns.asm)
+call respMessi4         ;COMPARO RESPUESTAS (en ans.asm)
 ;Pregunta 5
 call imppregunta5       ;LLAMO PREGUNTA 5 (en art.asm)
 mov ah,8
 int 21h
-call respMessi5         ;COMPARO RESPUESTAS (en messiAns.asm)
+call respMessi5         ;COMPARO RESPUESTAS (en ans.asm)
 ;Pregutna 6
 call imppregunta6       ;LLAMO PREGUNTA 6 (en art.asm)
 mov ah,8
 int 21h
-call respMessi6         ;COMPARO RESPUESTAS (en messiAns.asm)
+call respMessi6         ;COMPARO RESPUESTAS (en ans.asm)
 ;Pregunta 7
 call imppregunta7       ;LLAMO PREGUNTA 7 (en art.asm)
 mov ah,8
 int 21h
-call respMessi7         ;COMPARO RESPUESTAS (en messiAns.asm)
+call respMessi7         ;COMPARO RESPUESTAS (en ans.asm)
 jmp finMessi
 
 exit00:
@@ -143,37 +140,37 @@ juegoRonal:
 call imppregunta1       ;LLAMO PREGUNTA 1 (en art.asm)
 mov ah,8
 int 21h
-call respRonal1         ;COMPARO RESPUESTAS (en ronalAns.asm)
+call respRonal1         ;COMPARO RESPUESTAS (en ans.asm)
 ;Pregunta 2
 call imppregunta2       ;LLAMO PREGUNTA 2 (en art.asm)
 mov ah,8
 int 21h
-call respRonal2         ;COMPARO RESPUESTAS (en ronalAns.asm)
+call respRonal2         ;COMPARO RESPUESTAS (en ans.asm)
 ;Pregunta3
 call imppregunta3       ;LLAMO PREGUNTA 3 (en arte.asm)
 mov ah,8
 int 21h
-call respRonal3         ;COMPARO RESPUESTAS (en ronalAns.asm)
+call respRonal3         ;COMPARO RESPUESTAS (en ans.asm)
 ;Pregunta 4
 call imppregunta4       ;LLAMO PREGUNTA 4 (en art.asm)
 mov ah,8
 int 21h
-call respRonal4         ;COMPARO RESPUESTAS (en ronalAns.asm)
+call respRonal4         ;COMPARO RESPUESTAS (en ans.asm)
 ;Pregunta 5
 call imppregunta5       ;LLAMO PREGUNTA 5 (en art.asm)
 mov ah,8
 int 21h
-call respRonal5         ;COMPARO RESPUESTAS (en ronalAns.asm)
+call respRonal5         ;COMPARO RESPUESTAS (en ans.asm)
 ;Pregutna 6
 call imppregunta6       ;LLAMO PREGUNTA 6 (en art.asm)
 mov ah,8
 int 21h
-call respRonal6         ;COMPARO RESPUESTAS (en ronalAns.asm)
+call respRonal6         ;COMPARO RESPUESTAS (en ans.asm)
 ;Pregunta 7
 call imppregunta7       ;LLAMO PREGUNTA 7 (en art.asm)
 mov ah,8
 int 21h
-call respRonal7         ;COMPARO RESPUESTAS (en ronalAns.asm)
+call respRonal7         ;COMPARO RESPUESTAS (en ans.asm)
 jmp finRonal
 
 juegoLebron:
@@ -181,37 +178,37 @@ juegoLebron:
 call imppregunta1       ;LLAMO PREGUNTA 1 (en art.asm)
 mov ah,8
 int 21h
-call respLebron1         ;COMPARO RESPUESTAS (en jamesAns.asm)
+call respLebron1         ;COMPARO RESPUESTAS (en ans.asm)
 ;Pregunta 2
 call imppregunta2       ;LLAMO PREGUNTA 2 (en art.asm)
 mov ah,8
 int 21h
-call respLebron2         ;COMPARO RESPUESTAS (en jamesAns.asm)
+call respLebron2         ;COMPARO RESPUESTAS (en ans.asm)
 ;Pregunta3
 call imppregunta3       ;LLAMO PREGUNTA 3 (en art.asm)
 mov ah,8
 int 21h
-call respLebron3         ;COMPARO RESPUESTAS (en jamesAns.asm)
+call respLebron3         ;COMPARO RESPUESTAS (en ans.asm)
 ;Pregunta 4
 call imppregunta4       ;LLAMO PREGUNTA 4 (en art.asm)
 mov ah,8
 int 21h
-call respLebron4         ;COMPARO RESPUESTAS (en jamesAns.asm)
+call respLebron4         ;COMPARO RESPUESTAS (en ans.asm)
 ;Pregunta 5
 call imppregunta5       ;LLAMO PREGUNTA 5 (en art.asm)
 mov ah,8
 int 21h
-call respLebron5         ;COMPARO RESPUESTAS (en jamesAns.asm)
+call respLebron5         ;COMPARO RESPUESTAS (en ans.asm)
 ;Pregutna 6
 call imppregunta6       ;LLAMO PREGUNTA 6 (en art.asm)
 mov ah,8
 int 21h
-call respLebron6         ;COMPARO RESPUESTAS (en jamesAns.asm)
+call respLebron6         ;COMPARO RESPUESTAS (en ans.asm)
 ;Pregunta 7
 call imppregunta7       ;LLAMO PREGUNTA 7 (en art.asm)
 mov ah,8
 int 21h
-call respLebron7         ;COMPARO RESPUESTAS (en jamesAns.asm)
+call respLebron7         ;COMPARO RESPUESTAS (en ans.asm)
 jmp finLebron
 
 finMessi:
