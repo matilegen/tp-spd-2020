@@ -148,7 +148,7 @@ impbienv proc
     mov ah,9
     mov dx,offset bi00
     int 21h
-	;call welcomeSnd
+	;call welcomeSnd		;(en lib.asm)
 	
     mov si, 13
     scroll:
@@ -168,7 +168,7 @@ impbienv endp
 
 impmenu proc
 
-    int 69h
+    int 80h
     mov ah,9
     mov dx,offset mnu02
     int 21h
@@ -177,7 +177,7 @@ impmenu proc
 impmenu endp
 
 impinst proc
-	int 69h
+	int 80h
     mov ah,9
     mov dx,offset inst00
     int 21h
@@ -195,7 +195,8 @@ imppregunta1 proc
 	push dx
 	push si
 	push di
-	int 69h
+	xor bx, bx
+	int 80h
 ;pregunta 1
 	mov ah,9
 	mov dx,offset pr10
@@ -283,7 +284,7 @@ imppregunta2 proc
 	push si
 	push di
 
-	int 69h
+	int 80h
   	xor bx,bx
 
 ;pregunta 1 
@@ -317,7 +318,6 @@ imppregunta2 proc
 	mov dx,offset tab3
 	int 21h
 
-;call colorear	
 	inc bx
 	mov ah,6
 	mov dl,[bx+offset respuestas]
@@ -385,7 +385,7 @@ imppregunta3 proc
 	push di
 
     xor bx,bx  
-	int 69h   
+	int 80h   
 	;pregunta 1 
     mov ah,9
 	mov dx,offset pr30
@@ -478,7 +478,7 @@ imppregunta4 proc
 	push di
 
     xor bx,bx  
-	int 69h   
+	int 80h   
 ;pregunta 1 
     mov ah,9
 	mov dx,offset pr40
@@ -581,14 +581,12 @@ imppregunta5 proc
 	push dx
 	push si
 	push di
-
-	int 69h
+	xor bx,bx
+	int 80h
 ;pregunta 1
-    xor bx,bx
 	mov ah,9
 	mov dx,offset pr50
 	int 21h  
-	;call colorear
 	
 ;respuesta de la primer pregunta
 	mov ah,6
@@ -671,16 +669,13 @@ imppregunta6 proc
 	push dx
 	push si
 	push di
-
-	int 69h
-  xor bx,bx
+	xor bx,bx
+	int 80h
+  
 ;pregunta 1 
     mov ah,9
 	mov dx,offset pr60
 	int 21h  
-	push bx
-	;call colorear
-	pop bx
 ;respuesta de la primer pregunta
 	mov ah,6
 	mov dl,[bx+offset respuestas]
@@ -708,7 +703,6 @@ imppregunta6 proc
 	mov dx,offset tab3
 	int 21h
 
-;call colorear	
 	inc bx
 	mov ah,6
 	mov dl,[bx+offset respuestas]
@@ -719,7 +713,6 @@ imppregunta6 proc
 mov dx,offset re20
 	int 21h
 	
-;call colorear
 	inc bx
 	mov ah,6
 	mov dl,[bx+offset respuestas]
@@ -732,7 +725,6 @@ mov dx,offset re20
 	mov dx,offset re23
 	int 21h
 
-;call colorear
 	inc bx
 	mov ah,6
 	mov dl,[bx+offset respuestas]
@@ -745,7 +737,6 @@ mov dx,offset re20
 	mov dx,offset re25
 	int 21h
 
-;call colorear
 	inc bx
 	mov ah,6
 	mov dl,[bx+offset respuestas]
@@ -776,7 +767,7 @@ imppregunta7 proc
 	push di
 
     xor bx,bx  
-	int 69h   
+	int 80h   
 ;pregunta 1 
     mov ah,9
 	mov dx,offset pr70
@@ -872,52 +863,8 @@ imppregunta7 proc
 	ret
 imppregunta7 endp
 
-color_rojo proc
-
-	push bx
-
-	mov ah, 09
-    mov al, "X"     ;AL = Código del carácter a escribir.
-	mov bx, 000ch	;BH = Página BL =Color.
-    mov cx, 10       ;CX = Cantidad de veces.
-	int 10h
-
-	pop bx
-	ret
-color_rojo endp
-
-color_verde proc
-	push ax
-	push bx
-	push cx
-	push dx
-	push si
-	push di
-
-	mov ah, 9
-    mov al, "V"      ;AL = Código del carácter a escribir.
-	mov bx, 000ah
-    mov cx, 10       ;CX = Cantidad de veces que se debe escribir el carácter
-	int 10h
-
-	pop di
-	pop si
-	pop dx
-	pop cx
-	pop bx
-	pop ax
-	ret
-color_verde endp
-
 llenador_ proc
-	push ax
-	push bx
-	push cx
-	push dx
-	push si
-	push di
-
-    mov cx,8
+    mov cx,6
     xor bx,bx
     cicloresp:
     mov al,95
@@ -926,12 +873,6 @@ llenador_ proc
     inc bx
     loop cicloresp
 
-	pop di
-	pop si
-	pop dx
-	pop cx
-	pop bx
-	pop ax
     ret
 llenador_ endp
 
@@ -946,19 +887,11 @@ respondio_bien proc
     mov al,86
     mov [bx+offset respuestas],al
 
-
     ret
 respondio_bien endp
 
 scroll_down proc
-	push ax
-	push bx
-	push cx
-	push dx
-	push si
-	push di
-
-    mov ah, 6               ; http://www.ctyme.com/intr/rb-0097.htm
+    mov ah, 6               
     mov al, 1               ; number of lines to scroll
     mov bh, 0               ; attribute
     mov ch, 0               ; row top
@@ -967,12 +900,6 @@ scroll_down proc
     mov dl, 80              ; col right
     int 10h
 
-	pop di
-	pop si
-	pop dx
-	pop cx
-	pop bx
-	pop ax
     ret
 scroll_down endp
 end

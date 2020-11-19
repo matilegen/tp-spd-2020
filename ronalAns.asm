@@ -8,15 +8,15 @@ extrn respondio_mal:proc
 extrn winSnd:proc
 extrn lossSnd:proc
 
-    public respRonaldo1
-    public respRonaldo2
-    public respRonaldo3
-    public respRonaldo4
-    public respRonaldo5
-    public respRonaldo6
-    public respRonaldo7
+    public respRonal1
+    public respRonal2
+    public respRonal3
+    public respRonal4
+    public respRonal5
+    public respRonal6
+    public respRonal7
 
-respRonaldo1 proc
+respRonal1 proc
     mov bx,0
     cmp al,65
     je pre1opcion1
@@ -28,25 +28,24 @@ respRonaldo1 proc
     je pre1opcion2
 
     ;respondio mal
-    call respondio_mal
+    call respondio_mal      ;(en art.asm)
     jmp pregunta2
 
     ;respondio bien
     pre1opcion1:
-    call respondio_bien
+    call respondio_bien     ;(en art.asm)
     jmp pregunta2
 
     ;respondio mal
     pre1opcion2:
-    call respondio_mal
+    call respondio_mal      ;(en art.asm)
     jmp pregunta2
 
     pregunta2:
-
     ret   
-respRonaldo1 endp
+respRonal1 endp
 
-respRonaldo2 proc
+respRonal2 proc
     mov bx,1
     cmp al,65
     je pre2opcion1
@@ -62,30 +61,29 @@ respRonaldo2 proc
     je pre2opcion2
 
     ;respondio mal
-    call respondio_mal
+    call respondio_mal      ;(en art.asm)
     jmp pregunta3
 
     ;respondio bien
     pre2opcion1:
-    call respondio_bien
+    call respondio_bien     ;(en art.asm)
     jmp pregunta3 
 
     ;respondio mal
     pre2opcion2:
-    call respondio_mal
+    call respondio_mal      ;(en art.asm)
     jmp pregunta3
   
     ;respondio mal
     pre2opcion3:
-    call respondio_mal
+    call respondio_mal      ;(en art.asm)
     jmp pregunta3 
 
     pregunta3:
-
     ret
-respRonaldo2 endp
+respRonal2 endp
 
-respRonaldo3 proc
+respRonal3 proc
     mov bx,2
     cmp al,65
     je pre3opcion1
@@ -101,30 +99,36 @@ respRonaldo3 proc
     je pre3opcion2
 
     ;respondio mal
-    call respondio_mal
+    call respondio_mal      ;(en art.asm)
     jmp pregunta4
 
     ;respondio bien
     pre3opcion1:
-    call respondio_bien
+    call respondio_bien     ;(en art.asm)
     jmp pregunta4 
 
     ;respondio mal
     pre3opcion2:
-    call respondio_mal
+    call respondio_mal      ;(en art.asm)
     jmp pregunta4
   
     ;respondio mal
     pre3opcion3:
-    call respondio_mal
+    call respondio_mal      ;(en art.asm)
     jmp pregunta4
 
     pregunta4:
 
     ret
-respRonaldo3 endp
+respRonal3 endp
 
-respRonaldo4 proc
+respRonal4 proc
+    push ax
+	push bx
+	push cx
+	push dx
+	push si
+	push di
     mov bx,3
     cmp al,65
     je pre4opcion1
@@ -148,39 +152,51 @@ respRonaldo4 proc
     je pre4opcion5
 
     ;respondio mal
-    call respondio_mal
+    call respondio_mal      ;(en art.asm)
     jmp pregunta5
 
     ;respondio mal
     pre4opcion1:
-    call respondio_mal
+    call respondio_mal      ;(en art.asm)
     jmp pregunta5 
 
     ;respondio bien
     pre4opcion2:
-    call respondio_bien
+    call respondio_bien     ;(en art.asm)
     jmp pregunta5
   
     ;respondio mal
     pre4opcion3:
-    call respondio_mal
+    call respondio_mal      ;(en art.asm)
     jmp pregunta5
 
     ;respondio mal
     pre4opcion4:
-    call respondio_mal
+    call respondio_mal      ;(en art.asm)
     jmp pregunta5
 
     ;respondio mal
     pre4opcion5:
-    call respondio_mal
+    call respondio_mal      ;(en art.asm)
     jmp pregunta5
 
     pregunta5:
+    pop di
+	pop si
+	pop dx
+	pop cx
+	pop bx
+	pop ax
     ret
-respRonaldo4 endp
+respRonal4 endp
 
-respRonaldo5 proc
+respRonal5 proc
+    push ax
+	push bx
+	push cx
+	push dx
+	push si
+	push di
     mov bx,4
     cmp al,65
     je pre5opcion1
@@ -192,25 +208,36 @@ respRonaldo5 proc
     je pre5opcion2
 
     ;respondio mal
-    call respondio_mal
+    call respondio_mal      ;(en art.asm)
     jmp pregunta6
 
     ;respondio bien
     pre5opcion1:
-    call respondio_bien
+    call respondio_bien     ;(en art.asm)
     jmp pregunta6
 
     ;respondio mal
     pre5opcion2:
-    call respondio_mal
+    call respondio_mal      ;(en art.asm)
     jmp pregunta6 
 
     pregunta6:
-
+    pop di
+	pop si
+	pop dx
+	pop cx
+	pop bx
+	pop ax
     ret
-respRonaldo5 endp
+respRonal5 endp
 
-respRonaldo6 proc
+respRonal6 proc
+    push ax
+	push bx
+	push cx
+	push dx
+	push si
+	push di
     mov bx,5
     cmp al,65
     je pre6opcion1
@@ -226,30 +253,41 @@ respRonaldo6 proc
     je pre6opcion3
 
     ;respondio mal
-    call respondio_mal
+    call respondio_mal      ;(en art.asm)
     jmp pregunta7
 
     ;respondio bien
     pre6opcion1:
-    call respondio_bien
+    call respondio_bien     ;(en art.asm)
     jmp pregunta7 
 
     ;respondio mal
     pre6opcion2:
-    call respondio_mal
+    call respondio_mal      ;(en art.asm)
     jmp pregunta7
   
     ;respondio mal
     pre6opcion3:
-    call respondio_mal
+    call respondio_mal      ;(en art.asm)
     jmp pregunta7
 
     pregunta7:
-
+    pop di
+	pop si
+	pop dx
+	pop cx
+	pop bx
+	pop ax
     ret
-respRonaldo6 endp
+respRonal6 endp
 
-respRonaldo7 proc
+respRonal7 proc
+    push ax
+	push bx
+	push cx
+	push dx
+	push si
+	push di
     mov bx,6
     cmp al,65
     je pre7opcion1
@@ -273,36 +311,42 @@ respRonaldo7 proc
     je pre7opcion5
 
     ;respondio mal
-    call lossSnd
+    call lossSnd        ;(en snd.asm)
     jmp final
 
     ;respondio mal
     pre7opcion1:
-    call lossSnd
+    call lossSnd        ;(en snd.asm)
     jmp final 
 
     ;respondio mal
     pre7opcion2:
-    call lossSnd
+    call lossSnd        ;(en snd.asm)
     jmp final
   
     ;respondio mal
     pre7opcion3:
-    call lossSnd
+    call lossSnd        ;(en snd.asm)
     jmp final
 
     ;respondio mal
     pre7opcion4:
-    call lossSnd
+    call lossSnd        ;(en snd.asm)
     jmp final
 
     ;respondio bien
     pre7opcion5:
-    call winSnd
+    call winSnd         ;(en snd.asm)
     jmp final
 
     final:
+    pop di
+	pop si
+	pop dx
+	pop cx
+	pop bx
+	pop ax
     ret
-respRonaldo7 endp
+respRonal7 endp
 
 end         
