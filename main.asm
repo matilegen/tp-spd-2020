@@ -83,19 +83,15 @@ call impinst            ;IMPRIMO INTRUCCIONES (en art.asm)
 jmp imprimenu
 
 jugar:                  ;COMIENZO JUEGO
-xor ax, ax
-xor bx, bx
-xor cx, cx
-xor dx, dx
 call llenador_          ;(en art.asm)
-call randGen            ;LLAMO RANDOM NUMBER GENERATOR
+call randGen            ;LLAMO RANDOM NUMBER GENERATOR (en lib.asm)
+;mov dx, 1
 cmp dx, 0               ;SI TRAE 0 JUEGO MESSI
 je juegoMessi
-cmp dx, 1               ;SI TRAE 1 JUEGO LEBRON
+cmp dx, 2               ;SI TRAE 1 JUEGO LEBRON
 je juegoLebron0
-cmp dx, 2
+cmp dx, 1
 je juegoRonal        ;SI TRAE 2 JUEGO RONAL
-xor dx, dx
 jmp jugar
 
 juegoMessi:

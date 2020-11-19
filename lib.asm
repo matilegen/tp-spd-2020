@@ -149,7 +149,7 @@ randGen proc
     mov cx, 2
     div cx
 
-    ret
+    ret 
 randGen endp
 
 winSnd proc
